@@ -441,7 +441,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
         widget.bloc.selectService(model);
       },
       child: Container(
-        margin: EdgeInsets.only(left: Globals.maxPadding, right: 2.0),
+        margin: EdgeInsets.only(left: Globals.maxPadding, right: Globals.minPadding/2),
         padding: EdgeInsets.only(top: Globals.minPadding),
         child: Column(
           children: [
@@ -490,7 +490,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
               ]),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               StreamBuilder(
                   stream: widget.bloc.outputCategoryRequest,
@@ -507,7 +507,8 @@ class _HomeTabPageState extends State<HomeTabPage> {
               CustomLine(),
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       child:

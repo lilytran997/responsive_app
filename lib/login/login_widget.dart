@@ -1,3 +1,4 @@
+import 'package:demo_desktop/home_tabbar/src/ui/home_tabbar_widget.dart';
 import 'package:demo_desktop/login/login_desktop_widget.dart';
 import 'package:demo_desktop/utilities/check_platform.dart';
 import 'package:demo_desktop/utilities/globals.dart';
@@ -160,12 +161,14 @@ class _LoginPageState extends State<LoginPage> {
             // ),
             InkWell(
               onTap: () {
-                if (_emailController.text.trim() != "") {
-                  if (_passwordController.text.trim() != "") {
-                  } else {
-                    // customAnotherDialog(context, stringTabbarNotification, stringPassAlert);
-                  }
-                } else {}
+                print("aaaaa");
+                debugPrint("lyly");
+                Navigator.of(context, rootNavigator: true)
+                    .popUntil((route) => route.isFirst);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeTabbarPage()),
+                );
               },
               child: Container(
                 margin: EdgeInsets.only(

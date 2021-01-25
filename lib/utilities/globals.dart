@@ -29,6 +29,7 @@ class Globals{
      statusBarHeight = MediaQuery.of(context).padding.top;
      if(ResponsiveWidget.isSmallScreen(context)){
        if(ResponsiveWidget.isLargerWidth(context)){
+         print("isLargerWidth");
          maxPadding = maxHeight * 0.05;
          minPadding = maxPadding / 2;
          tabbarSize = maxHeight / 10 * 7;
@@ -38,10 +39,12 @@ class Globals{
          tabbarSize = maxWidth / 10 * 7;
        }
      }else if(ResponsiveWidget.isMediumScreen(context)){
+       print("isMediumScreen");
        maxPadding = maxHeight * 0.05;
        minPadding = maxPadding / 2;
        tabbarSize = maxHeight / 10 * 7;
      }else{
+       print("isSmallScreen");
        maxPadding = maxHeight * 0.05;
        minPadding = maxPadding / 2;
        tabbarSize = maxHeight / 10 * 7;

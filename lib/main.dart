@@ -1,5 +1,6 @@
 
 
+import 'package:demo_desktop/common/constant.dart';
 import 'package:demo_desktop/splash/splash_screen_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    changeStatusBarColor(Colors.transparent, true);
     return MaterialApp(
       title: 'Demo desktop',
       debugShowCheckedModeBanner: false,

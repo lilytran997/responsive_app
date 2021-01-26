@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     changeStatusBarColor(Colors.transparent, true);
     return MaterialApp(
-      title: 'Demo desktop',
+      title: 'Demo responsive app',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.

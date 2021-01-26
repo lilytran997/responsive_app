@@ -1,6 +1,8 @@
+import 'package:demo_desktop/common/constant.dart';
 import 'package:demo_desktop/home_tabbar/src/ui/home_tabbar_widget.dart';
 import 'package:demo_desktop/login/login_desktop_widget.dart';
 import 'package:demo_desktop/utilities/check_platform.dart';
+import 'package:demo_desktop/utilities/custom_route.dart';
 import 'package:demo_desktop/utilities/globals.dart';
 import 'package:demo_desktop/utilities/responsive.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,10 +20,25 @@ class _LoginPageState extends State<LoginPage> {
 
   FocusNode _emailNode = FocusNode();
   FocusNode _passwordNode = FocusNode();
-
+  String _platform = "";
   @override
   void initState() {
     // TODO: implement initState
+    if (ApplicationPlatform.isAndroid) {
+      _platform = "Mobisale";
+    } else if (ApplicationPlatform.isIOS) {
+      _platform = "Mobisale";
+    } else if (ApplicationPlatform.isLinux) {
+      _platform = "Appsale";
+    } else if (ApplicationPlatform.isMacOS) {
+      _platform = "Appsale";
+    } else if (ApplicationPlatform.isWindows) {
+      _platform = "Appsale";
+    } else if (ApplicationPlatform.isWeb) {
+      _platform = "Websale";
+    } else {
+      _platform = "undefined platform";
+    }
     super.initState();
   }
 
@@ -137,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                 margin: EdgeInsets.only(
                     top: Globals.maxPadding, bottom: Globals.minPadding),
                 child: Text(
-                  "Mobisale",
+                  _platform??"",
                   style: TextStyle(
                       fontSize: Globals.maxPadding,
                       fontWeight: FontWeight.w600,
@@ -161,13 +178,15 @@ class _LoginPageState extends State<LoginPage> {
             // ),
             InkWell(
               onTap: () {
-                print("aaaaa");
-                debugPrint("lyly");
                 Navigator.of(context, rootNavigator: true)
                     .popUntil((route) => route.isFirst);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => HomeTabbarPage()),
+                  CustomRoute(
+                      page: HomeTabbarPage(),
+                      opaque: true,
+                      isHero: false
+                  ),
                 );
               },
               child: Container(

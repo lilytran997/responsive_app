@@ -4,11 +4,11 @@ import 'package:demo_desktop/models/service_category_request_model.dart';
 import 'package:demo_desktop/utilities/custom_line.dart';
 import 'package:demo_desktop/utilities/custom_scaffold.dart';
 import 'package:demo_desktop/utilities/globals.dart';
-import 'package:demo_desktop/utilities/network_image.dart';
 import 'package:demo_desktop/utilities/responsive.dart';
 import 'package:demo_desktop/utilities/row_title_widget.dart';
 import 'package:demo_desktop/utilities/tab_model.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeTabPage extends StatefulWidget {
   final HomeTabbarBloc bloc;
@@ -41,9 +41,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
       }
     });
     _activityIcon
-      ..add(TabWidget(Image.asset(icMainReport), Container(), stringReport, () {
-        widget.onTapCallBack(2);
-      }))
+      ..add(TabWidget(Image.asset(icMainReport), Container(), stringReport, _launchURL))
       ..add(TabWidget(
           Image.asset(icMainSuppliesDisable), Container(), stringReceive, () {
 //        CustomNavigator().push(context, MainDeliveryPage());
@@ -75,6 +73,14 @@ class _HomeTabPageState extends State<HomeTabPage> {
     super.dispose();
   }
 
+  _launchURL() async {
+    const url = 'https://flutter.dev';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
   Widget _buildTitleProvince() {
     return Container(
       margin: EdgeInsets.only(bottom: Globals.minPadding),

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:demo_desktop/login/login_widget.dart';
 import 'package:demo_desktop/utilities/check_platform.dart';
+import 'package:demo_desktop/utilities/custom_route.dart';
 import 'package:demo_desktop/utilities/globals.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,11 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     Future.delayed(Duration(seconds: 5))
         .then((value) => Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => LoginPage()),
+        CustomRoute(
+            page: LoginPage(),
+            opaque: true,
+            isHero: false
+        ),
             ));
   }
 

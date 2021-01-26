@@ -34,5 +34,3 @@ class HexColor extends Color {
 
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
-
-final primaryColor = HexColor("3E64FF");

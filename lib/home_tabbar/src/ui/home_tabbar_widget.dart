@@ -1,8 +1,7 @@
 import 'package:demo_desktop/common/constant.dart';
 import 'package:demo_desktop/home_tabbar/src/bloc/home_tabbar_bloc.dart';
 import 'package:demo_desktop/home_tabbar/tab_main/home_tab/src/ui/home_tab_widget.dart';
-import 'package:demo_desktop/utilities/globals.dart';
-import 'package:demo_desktop/utilities/responsive.dart';
+import 'package:demo_desktop/home_tabbar/tab_main/report_tab/src/ui/report_tab_widget.dart';
 import 'package:demo_desktop/utilities/tab_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,7 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
           ImageIcon(AssetImage(icTabbarCart)),
           Container(),
           stringTabbarCart,(){}))
-      ..add(TabWidget(ImageIcon(AssetImage(icTabbarQueueIn)),Container(),
+      ..add(TabWidget(ImageIcon(AssetImage(icTabbarQueueIn)),MyHomePage(),
           stringTabbarQueueIn,(){}))
       ..add(TabWidget(ImageIcon(AssetImage(icTabbarNotification)),Container(),
           stringTabbarNotification,(){}))

@@ -1,6 +1,7 @@
 import 'package:demo_desktop/common/constant.dart';
 import 'package:demo_desktop/home_tabbar/src/bloc/home_tabbar_bloc.dart';
 import 'package:demo_desktop/home_tabbar/tab_main/home_tab/src/ui/home_tab_widget.dart';
+import 'package:demo_desktop/home_tabbar/tab_main/profile_tab/src/ui/profile_tab_widget.dart';
 import 'package:demo_desktop/home_tabbar/tab_main/report_tab/src/ui/report_tab_widget.dart';
 import 'package:demo_desktop/utilities/tab_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,12 +31,12 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
           ImageIcon(AssetImage(icTabbarCart)),
           Container(),
           stringTabbarCart,(){}))
-      ..add(TabWidget(ImageIcon(AssetImage(icTabbarQueueIn)),MyHomePage(),
+      ..add(TabWidget(ImageIcon(AssetImage(icTabbarQueueIn)),ReportPage(),
           stringTabbarQueueIn,(){}))
       ..add(TabWidget(ImageIcon(AssetImage(icTabbarNotification)),Container(),
           stringTabbarNotification,(){}))
       ..add(TabWidget(
-          ImageIcon(AssetImage(icTabbarUser)), Container(), stringTabbarUser,(){}));
+          ImageIcon(AssetImage(icTabbarUser)), ProfilePage(), stringTabbarUser,(){}));
     _controller.addListener(() {
       String name ="";
       if(_tabs[_controller.index].child.runtimeType.toString().contains("Screen")){

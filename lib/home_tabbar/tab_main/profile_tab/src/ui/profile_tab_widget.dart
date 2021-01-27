@@ -5,12 +5,12 @@ import 'package:demo_desktop/utilities/network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ReportPage extends StatefulWidget {
+class ProfilePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<ReportPage> {
+class _MyHomePageState extends State<ProfilePage> {
   String _platform;
   ApplicationResult image;
 
@@ -50,9 +50,9 @@ class _MyHomePageState extends State<ReportPage> {
               ),
             ),
             Container(
-             margin: EdgeInsets.only(
-               right: Globals.maxPadding,left: Globals.maxPadding,bottom: Globals.minPadding
-             ),
+              margin: EdgeInsets.only(
+                  right: Globals.maxPadding,left: Globals.maxPadding,bottom: Globals.minPadding
+              ),
               child: ApplicationNetworkImage(
                 url:
                 "https://images.pexels.com/photos/414102/pexels-photo-414102.jpeg",

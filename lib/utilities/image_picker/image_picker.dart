@@ -5,10 +5,10 @@ import 'dart:typed_data';
 import 'package:camera/camera.dart';
 import 'package:demo_desktop/utilities/check_platform.dart';
 import 'package:demo_desktop/utilities/custom_navigator.dart';
-import 'package:demo_desktop/utilities/file_picker_win/filepicker_windows.dart';
-// import 'package:demo_desktop/utilities/file_picker_win/filepicker_windows.dart';
 import 'package:demo_desktop/utilities/image_picker/camera/custom_camera.dart';
 import 'package:demo_desktop/utilities/permission_request.dart';
+import 'package:file_selector/file_selector.dart';
+import 'package:file_selector_platform_interface/file_selector_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
@@ -107,19 +107,17 @@ class ApplicationImagePicker {
       return result;
     }else{
       //windows
-      final file = OpenFilePicker();
-      file.hidePinnedPlaces = true;
-      file.forcePreviewPaneOn = true;
-      file.filterSpecification = {
-        'JPEG Files': '*.jpg;*.jpeg',
-        'Bitmap Files': '*.bmp',
-        'All Files (*.*)': '*.*'
-      };
-      file.title = 'Select an image';
-      File image = file.getFile();
-      if (image != null) {
+      final XTypeGroup typeGroup = XTypeGroup(
+        label: 'images',
+        extensions: ['jpg', 'png'],
+      );
+      final List<XFile> files = await FileSelectorPlatform.instance.openFiles(acceptedTypeGroups: [typeGroup]);
+      final XFile file = files[0];
+      if (file != null) {
+        final String fileName = file.name;
+        final String filePath = file.path;
         ApplicationResult result = ApplicationResult();
-        result.file = await compressImage(File(image.path));
+        result.file = await compressImage(File(filePath));
         return result;
       }
       return null;

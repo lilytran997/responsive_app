@@ -41,7 +41,9 @@ class _HomeTabPageState extends State<HomeTabPage> {
       }
     });
     _activityIcon
-      ..add(TabWidget(Image.asset(icMainReport), Container(), stringReport, _launchURL))
+      ..add(TabWidget(Image.asset(icMainReport), Container(), stringReport, (){
+
+      }))
       ..add(TabWidget(
           Image.asset(icMainSuppliesDisable), Container(), stringReceive, () {
 //        CustomNavigator().push(context, MainDeliveryPage());
@@ -71,15 +73,6 @@ class _HomeTabPageState extends State<HomeTabPage> {
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-
-  _launchURL() async {
-    const url = 'https://flutter.dev';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
   Widget _buildTitleProvince() {
     return Container(
@@ -595,36 +588,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
 
   @override
   Widget build(BuildContext context) {
-    Globals.maxWidth = MediaQuery.of(context).size.width;
-    Globals.maxHeight = MediaQuery.of(context).size.height;
-    Globals.statusBarHeight = MediaQuery.of(context).padding.top;
-    if(ResponsiveWidget.isSmallScreen(context)){
-      if(ResponsiveWidget.isLargerWidth(context)){
-        Globals.maxPadding = Globals.maxHeight * 0.05;
-        Globals.minPadding = Globals.maxPadding / 2;
-        Globals.tabbarSize = Globals.maxHeight / 10 * 7;
-        print(Globals.maxPadding);
-        print("ssssssssssssss");
-      }else{
-        Globals.maxPadding = Globals.maxWidth * 0.05;
-        Globals.minPadding = Globals.maxPadding / 2;
-        Globals.tabbarSize = Globals.maxWidth / 10 * 7;
-        print(Globals.maxPadding);
-        print("bbbbbbbbbbbbb");
-      }
-    }else if(ResponsiveWidget.isMediumScreen(context)){
-      Globals.maxPadding = Globals.maxHeight * 0.05;
-      Globals.minPadding = Globals.maxPadding / 2;
-      Globals.tabbarSize = Globals.maxHeight / 10 * 7;
-      print(Globals.maxPadding);
-      print("ddddddddddddddd");
-    }else{
-      Globals.maxPadding = Globals.maxHeight * 0.05;
-      Globals.minPadding = Globals.maxPadding / 2;
-      Globals.tabbarSize =Globals.maxHeight / 10 * 7;
-      print(Globals.maxPadding);
-      print("cccccccccc");
-    }
+    Globals().init(context: context);
     return CustomScaffold(
       backgroundColor: royalBlue01Color,
       body: _buildBody(),

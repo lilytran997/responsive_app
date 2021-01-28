@@ -41,16 +41,14 @@ class _HomeTabPageState extends State<HomeTabPage> {
       }
     });
     _activityIcon
-      ..add(TabWidget(Image.asset(icMainReport), Container(), stringReport, (){
-
-      }))
+      ..add(TabWidget(
+          Image.asset(icMainReport), Container(), stringReport, () {}))
       ..add(TabWidget(
           Image.asset(icMainSuppliesDisable), Container(), stringReceive, () {
 //        CustomNavigator().push(context, MainDeliveryPage());
       }, isDisable: true))
-      ..add(TabWidget(Image.asset(icMainDeployment), Container(), stringDeploy,
-          () {
-      }))
+      ..add(TabWidget(
+          Image.asset(icMainDeployment), Container(), stringDeploy, () {}))
       ..add(TabWidget(Image.asset(icMainMap), Container(), stringPoints, () {
         // CustomNavigator().push(context, GroupPointScreen());
       }))
@@ -74,6 +72,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
     _controller.dispose();
     super.dispose();
   }
+
   Widget _buildTitleProvince() {
     return Container(
       margin: EdgeInsets.only(bottom: Globals.minPadding),
@@ -181,8 +180,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
               //     ));
             },
             child: Container(
-              padding:
-              EdgeInsets.symmetric(horizontal: Globals.minPadding),
+              padding: EdgeInsets.symmetric(horizontal: Globals.minPadding),
               child: Text(
                 stringAll,
                 textAlign: TextAlign.end,
@@ -201,8 +199,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                _buildItemCardCompleted(
-                    icSlipReturned, stringProgressCompleted)
+                _buildItemCardCompleted(icSlipReturned, stringProgressCompleted)
               ],
             ),
           ),
@@ -231,8 +228,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
               //     ));
             },
             child: Container(
-              padding:
-              EdgeInsets.symmetric(horizontal: Globals.minPadding),
+              padding: EdgeInsets.symmetric(horizontal: Globals.minPadding),
               child: Text(
                 stringAll,
                 textAlign: TextAlign.end,
@@ -250,8 +246,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
             physics: ClampingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: Row(
-              children:
-              [
+              children: [
                 _buildItemCardCompleted(icSlipReturned, stringSlipReturned)
               ],
             ),
@@ -268,7 +263,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
       child: Column(
         children: [
           Container(
-            height: Globals.statusBarHeight+Globals.maxPadding,
+            height: Globals.statusBarHeight + Globals.maxPadding,
             color: primaryColor,
           ),
           Expanded(
@@ -291,16 +286,15 @@ class _HomeTabPageState extends State<HomeTabPage> {
     );
   }
 
-  Widget _titleIcon(String name, String url) {
-
+  Widget _titleIcon(String nameText, String url) {
     String imageUrl = url ?? "";
     String name = "";
-    if ((name ?? "") != "") {
-      if (name.contains("/")) {
-        List<String> temp = name.split("/");
+    if ((nameText ?? "") != "") {
+      if (nameText.contains("/")) {
+        List<String> temp = nameText.split("/");
         name = temp[0] + "\n /" + temp[1];
-      } else if (name.contains(" ")) {
-        List<String> temp = name.split(" ");
+      } else if (nameText.contains(" ")) {
+        List<String> temp = nameText.split(" ");
         for (int i = 0; i < temp.length; i++) {
           name += temp[i];
           name += " ";
@@ -309,31 +303,38 @@ class _HomeTabPageState extends State<HomeTabPage> {
           }
         }
       } else {
-        name = name;
+        name = nameText;
       }
     }
     return GestureDetector(
-      onTap: () {
-
-      },
+      onTap: () {},
       child: Container(
         alignment: Alignment.center,
         padding: EdgeInsets.only(
-            right: Globals.minPadding,
-            left: Globals.minPadding,
-           ),
+          right: Globals.minPadding,
+          left: Globals.minPadding,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Expanded(
-              child: Container(
-                  margin: EdgeInsets.only(
-                      right: Globals.minPadding / 2,
-                      left: Globals.minPadding / 2,top: Globals.minPadding),
-                  alignment: Alignment.center,
-                  child: Image.asset(icMainChecklist)),
-            ),
+            ResponsiveWidget.isSmallScreen(context)
+                ? Container(
+                    height: Globals.maxPadding * 2.5,
+                    margin: EdgeInsets.only(
+                        right: Globals.minPadding / 2,
+                        left: Globals.minPadding / 2),
+                    alignment: Alignment.center,
+                    child: Image.asset(icMainChecklist))
+                : Expanded(
+                    child: Container(
+                        margin: EdgeInsets.only(
+                            right: Globals.minPadding / 2,
+                            left: Globals.minPadding / 2,
+                            top: Globals.minPadding),
+                        alignment: Alignment.center,
+                        child: Image.asset(icMainChecklist)),
+                  ),
             Padding(
               padding: EdgeInsets.only(top: 10.0),
               child: Text(
@@ -341,8 +342,10 @@ class _HomeTabPageState extends State<HomeTabPage> {
                 textScaleFactor: 0.9,
                 maxLines: 2,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.w500,fontSize: 13,color: Colors.black
-                ),
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 13,
+                    color: Colors.black),
               ),
             )
           ],
@@ -442,7 +445,8 @@ class _HomeTabPageState extends State<HomeTabPage> {
         widget.bloc.selectService(model);
       },
       child: Container(
-        margin: EdgeInsets.only(left: Globals.maxPadding, right: Globals.minPadding/2),
+        margin: EdgeInsets.only(
+            left: Globals.maxPadding, right: Globals.minPadding / 2),
         padding: EdgeInsets.only(top: Globals.minPadding),
         child: Column(
           children: [
@@ -477,8 +481,10 @@ class _HomeTabPageState extends State<HomeTabPage> {
       children: [
         _buildTitleProvince(),
         Container(
-          height: Globals.maxHeight * 0.25,
-          width:  Globals.maxWidth,
+          height: ResponsiveWidget.isSmallScreen(context)
+              ? Globals.maxHeight * 0.21
+              : Globals.maxHeight * 0.25,
+          width: Globals.maxWidth,
           decoration: BoxDecoration(
               color: whiteColor,
               borderRadius: BorderRadius.all(Radius.circular(12.0)),
@@ -512,18 +518,17 @@ class _HomeTabPageState extends State<HomeTabPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      child:
-                     ListView.builder(
+                      child: ListView.builder(
                           padding: EdgeInsets.only(
                               left: Globals.minPadding,
                               right: Globals.minPadding),
                           shrinkWrap: true,
-                          itemCount:4,
+                          itemCount: 4,
                           controller: _controller,
                           scrollDirection: Axis.horizontal,
                           physics: ClampingScrollPhysics(),
                           itemBuilder: (_, index) {
-                            return _titleIcon("text","");
+                            return _titleIcon("text", "");
                           }),
                     ),
                     Row(
@@ -534,8 +539,8 @@ class _HomeTabPageState extends State<HomeTabPage> {
                           height: 4,
                           decoration: BoxDecoration(
                               color: royal60Color,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(12.0))),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12.0))),
                         ),
                       ],
                     ),

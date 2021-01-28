@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
         margin: EdgeInsets.only(
             left: Globals.maxPadding,
             right: Globals.maxPadding,
-            top: Globals.maxPadding),
+            top: Globals.maxPadding+Globals.statusBarHeight),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

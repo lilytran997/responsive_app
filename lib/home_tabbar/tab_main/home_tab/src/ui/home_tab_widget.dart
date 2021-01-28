@@ -326,21 +326,23 @@ class _HomeTabPageState extends State<HomeTabPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-                height: Globals.maxPadding*2.3,
-                margin: EdgeInsets.only(
-                    right: Globals.minPadding / 2,
-                    left: Globals.minPadding / 2),
-                alignment: Alignment.center,
-                child: Image.asset(icMainChecklist)),
+            Expanded(
+              child: Container(
+                  margin: EdgeInsets.only(
+                      right: Globals.minPadding / 2,
+                      left: Globals.minPadding / 2,top: Globals.minPadding),
+                  alignment: Alignment.center,
+                  child: Image.asset(icMainChecklist)),
+            ),
             Padding(
-              padding: EdgeInsets.only(top: 5.0),
+              padding: EdgeInsets.only(top: 10.0),
               child: Text(
                 name,
                 textScaleFactor: 0.9,
                 maxLines: 2,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.w500,fontSize: 13),
+                style: TextStyle(fontWeight: FontWeight.w500,fontSize: 13,color: Colors.black
+                ),
               ),
             )
           ],
@@ -521,8 +523,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                           scrollDirection: Axis.horizontal,
                           physics: ClampingScrollPhysics(),
                           itemBuilder: (_, index) {
-
-                            return _titleIcon("","");
+                            return _titleIcon("text","");
                           }),
                     ),
                     Row(

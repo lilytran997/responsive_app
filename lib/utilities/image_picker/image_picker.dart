@@ -200,6 +200,7 @@ class ApplicationImagePicker {
 
   static Future<bool> storagePermission(BuildContext context) async {
     if (await Permission.storage.isPermanentlyDenied) {
+
       await openAppSettings();
       PermissionStatus permission = await Permission.storage.status;
       if (permission == PermissionStatus.granted) {
@@ -207,6 +208,8 @@ class ApplicationImagePicker {
       }
       return false;
     } else {
+      print('aaaa');
+      print('aaaa');
       PermissionStatus permission = await Permission.storage.status;
       if (permission == PermissionStatus.granted) {
         return true;

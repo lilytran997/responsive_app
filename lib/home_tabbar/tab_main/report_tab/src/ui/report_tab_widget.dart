@@ -1,10 +1,7 @@
 import 'package:demo_desktop/utilities/check_platform.dart';
 import 'package:demo_desktop/utilities/globals.dart';
-import 'package:demo_desktop/utilities/image_picker/image_picker.dart';
-import 'package:demo_desktop/utilities/network_image.dart';
 import 'package:easy_web_view/easy_web_view.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ReportPage extends StatefulWidget {
   @override
@@ -22,21 +19,21 @@ class _MyHomePageState extends State<ReportPage> {
   Widget build(BuildContext context) {
     Globals().init(context: context);
     return Scaffold(
-      body: Container(
-        child: SingleChildScrollView(
-          child: ApplicationPlatform.isWindows
-              ? Container()
-              : EasyWebView(
-                  src: htmlContent,
-                  isHtml: true, // Use Html syntax
-                  isMarkdown: false, // Use markdown syntax
-                  convertToWidgets: false,
-                  onLoaded: () {}, // Try to convert to flutter widgets
-                  // width: 100,
-                  // height: 100,
-                ),
-        ),
+      backgroundColor: Colors.white,
+      body: ApplicationPlatform.isWindows
+          ? Container()
+          : Padding(
+            padding:  EdgeInsets.only(top:Globals.statusBarHeight),
+            child: EasyWebView(
+        src: htmlContent,
+        isHtml: true, // Use Html syntax
+        isMarkdown: false, // Use markdown syntax
+        convertToWidgets: false,
+        onLoaded: () {}, webAllowFullScreen: false,// Try to convert to flutter widgets
+        // width: 100,
+        height: Globals.maxHeight-Globals.maxPadding,
       ),
+          ),
     );
   }
 

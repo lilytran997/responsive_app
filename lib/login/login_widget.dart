@@ -8,6 +8,7 @@ import 'package:demo_desktop/utilities/responsive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:universal_html/html.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -178,7 +179,15 @@ class _LoginPageState extends State<LoginPage> {
             // ),
             InkWell(
               onTap: () {
-                Globals.prefs.setString("KEY_TEST", "TEST LOCAL STORAGE");
+                if(ApplicationPlatform.isWeb){
+                  String username = Globals.prefs.getString("KEY_TEST");
+                  if (username != null) {
+                    window.localStorage.remove('username');
+                  }
+                  window.sessionStorage['username'] = "TEST LOCAL STORAGE";
+                }else{
+                  Globals.prefs.setString("KEY_TEST", "TEST LOCAL STORAGE");
+                }
                 Navigator.of(context, rootNavigator: true)
                     .popUntil((route) => route.isFirst);
                 Navigator.pushReplacement(

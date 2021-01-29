@@ -5,6 +5,7 @@ import 'package:demo_desktop/splash/splash_screen_widget.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+
   runApp(MyApp());
 }
 

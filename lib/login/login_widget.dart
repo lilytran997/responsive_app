@@ -178,6 +178,7 @@ class _LoginPageState extends State<LoginPage> {
             // ),
             InkWell(
               onTap: () {
+                Globals.prefs.setString("KEY_TEST", "TEST LOCAL STORAGE");
                 Navigator.of(context, rootNavigator: true)
                     .popUntil((route) => route.isFirst);
                 Navigator.pushReplacement(

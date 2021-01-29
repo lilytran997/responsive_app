@@ -318,23 +318,13 @@ class _HomeTabPageState extends State<HomeTabPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ResponsiveWidget.isSmallScreen(context)
-                ? Container(
-                    height: Globals.maxPadding * 2.5,
-                    margin: EdgeInsets.only(
-                        right: Globals.minPadding / 2,
-                        left: Globals.minPadding / 2),
-                    alignment: Alignment.center,
-                    child: Image.asset(icMainChecklist))
-                : Expanded(
-                    child: Container(
-                        margin: EdgeInsets.only(
-                            right: Globals.minPadding / 2,
-                            left: Globals.minPadding / 2,
-                            top: Globals.minPadding),
-                        alignment: Alignment.center,
-                        child: Image.asset(icMainChecklist)),
-                  ),
+            Container(
+                height: Globals.maxPadding * 2.5,
+                margin: EdgeInsets.only(
+                    right: Globals.minPadding / 2,
+                    left: Globals.minPadding / 2),
+                alignment: Alignment.center,
+                child: Image.asset(icMainChecklist)),
             Padding(
               padding: EdgeInsets.only(top: 10.0),
               child: Text(
@@ -481,9 +471,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
       children: [
         _buildTitleProvince(),
         Container(
-          height: ResponsiveWidget.isSmallScreen(context)
-              ? Globals.maxHeight * 0.21
-              : Globals.maxHeight * 0.25,
+          height: Globals.maxHeight * 0.25,
           width: Globals.maxWidth,
           decoration: BoxDecoration(
               color: whiteColor,
@@ -545,7 +533,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                       ],
                     ),
                     Container(
-                      height: Globals.minPadding * 0.6,
+                      height: 10,
                     )
                   ],
                 ),

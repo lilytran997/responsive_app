@@ -1,8 +1,7 @@
 import 'package:demo_desktop/common/constant.dart';
-import 'package:demo_desktop/home_tabbar/src/ui/home_tabbar_widget.dart';
 import 'package:demo_desktop/login/login_desktop_widget.dart';
 import 'package:demo_desktop/utilities/check_platform.dart';
-import 'package:demo_desktop/utilities/custom_route.dart';
+import 'package:demo_desktop/utilities/custom_navigator.dart';
 import 'package:demo_desktop/utilities/globals.dart';
 import 'package:demo_desktop/utilities/responsive.dart';
 import 'package:flutter/cupertino.dart';
@@ -188,15 +187,9 @@ class _LoginPageState extends State<LoginPage> {
                 }else{
                   Globals.prefs.setString("KEY_TEST", "TEST LOCAL STORAGE");
                 }
-                Navigator.of(context, rootNavigator: true)
-                    .popUntil((route) => route.isFirst);
-                Navigator.pushReplacement(
+                CustomNavigator().pushNamedAndRemoveUntil(
                   context,
-                  CustomRoute(
-                      page: HomeTabbarPage(),
-                      opaque: true,
-                      isHero: false
-                  ),
+                  "/HomePage",
                 );
               },
               child: Container(

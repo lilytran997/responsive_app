@@ -2,9 +2,12 @@ import 'dart:async';
 
 import 'package:demo_desktop/login/login_widget.dart';
 import 'package:demo_desktop/utilities/check_platform.dart';
+import 'package:demo_desktop/utilities/custom_navigator.dart';
 import 'package:demo_desktop/utilities/custom_route.dart';
 import 'package:demo_desktop/utilities/globals.dart';
 import 'package:flutter/material.dart';
+import 'package:universal_html/html.dart' as html;
+import 'package:universal_html/html.dart' as html;
 
 class SplashScreenPage extends StatefulWidget {
   @override
@@ -32,15 +35,9 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     } else {
       _platform = "undefined platform";
     }
-    Future.delayed(Duration(seconds: 5))
-        .then((value) => Navigator.pushReplacement(
-              context,
-        CustomRoute(
-            page: LoginPage(),
-            opaque: true,
-            isHero: false
-        ),
-            ));
+    Future.delayed(Duration(seconds: 8))
+        .then((value) => CustomNavigator().pushName(
+              context, "/LoginPage",));
   }
 
   @override

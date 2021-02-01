@@ -101,6 +101,7 @@ class ApplicationImagePicker {
       final encoded = await completer.future;
       final stripped =
       encoded.replaceFirst(RegExp(r'data:image/[^;]+;base64,'), '');
+      print(stripped);
       Uint8List data = base64.decode(stripped);
       result.image = Image.memory(data);
       result.bytes = data;

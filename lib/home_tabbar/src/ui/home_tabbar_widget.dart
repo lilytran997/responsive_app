@@ -6,6 +6,8 @@ import 'package:demo_desktop/home_tabbar/tab_main/report_tab/src/ui/report_tab_w
 import 'package:demo_desktop/utilities/tab_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:universal_html/html.dart' as html;
+
 class HomeTabbarPage extends StatefulWidget {
   @override
   _HomeTabbarPageState createState() => _HomeTabbarPageState();
@@ -15,7 +17,6 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
   List<TabWidget> _tabs;
   HomeTabbarBloc _bloc;
   CupertinoTabController _controller = CupertinoTabController(initialIndex: 0);
-
   @override
   void initState() {
     super.initState();
@@ -24,38 +25,57 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
     _tabs
       ..add(TabWidget(
           ImageIcon(AssetImage(icTabbarHome)),
-          HomeTabPage(_bloc,onTapCallBack: onTapCallBack,
+          HomeTabPage(
+            _bloc,
+            onTapCallBack: onTapCallBack,
           ),
-          stringTabbarHome,(){}))
-      ..add(TabWidget(
-          ImageIcon(AssetImage(icTabbarCart)),
-          Container(),
-          stringTabbarCart,(){}))
-      ..add(TabWidget(ImageIcon(AssetImage(icTabbarQueueIn)),ReportPage(),
-          stringTabbarQueueIn,(){}))
-      ..add(TabWidget(ImageIcon(AssetImage(icTabbarNotification)),Container(),
-          stringTabbarNotification,(){}))
-      ..add(TabWidget(
-          ImageIcon(AssetImage(icTabbarUser)), ProfilePage(), stringTabbarUser,(){}));
+          stringTabbarHome,
+          () {}))
+      ..add(TabWidget(ImageIcon(AssetImage(icTabbarCart)), Container(),
+          stringTabbarCart, () {}))
+      ..add(TabWidget(ImageIcon(AssetImage(icTabbarQueueIn)), ReportPage(),
+          stringTabbarQueueIn, () {}))
+      ..add(TabWidget(ImageIcon(AssetImage(icTabbarNotification)), Container(),
+          stringTabbarNotification, () {}))
+      ..add(TabWidget(ImageIcon(AssetImage(icTabbarUser)), ProfilePage(),
+          stringTabbarUser, () {}));
     _controller.addListener(() {
-      String name ="";
-      if(_tabs[_controller.index].child.runtimeType.toString().contains("Screen")){
-        name =
-            _tabs[_controller.index].child.runtimeType.toString().replaceAll('Screen', ' ') + "Screen";
-      }else if( _tabs[_controller.index].child.runtimeType.toString().contains("Page")){
-        name =
-            _tabs[_controller.index].child.runtimeType.toString().replaceAll('Page', ' ') + "Screen";
-      }else{
-        name = _tabs[_controller.index].child.runtimeType.toString()+ "Screen";
+      String name = "";
+      if (_tabs[_controller.index]
+          .child
+          .runtimeType
+          .toString()
+          .contains("Screen")) {
+        name = _tabs[_controller.index]
+                .child
+                .runtimeType
+                .toString()
+                .replaceAll('Screen', ' ') +
+            "Screen";
+      } else if (_tabs[_controller.index]
+          .child
+          .runtimeType
+          .toString()
+          .contains("Page")) {
+        name = _tabs[_controller.index]
+                .child
+                .runtimeType
+                .toString()
+                .replaceAll('Page', ' ') +
+            "Screen";
+      } else {
+        name = _tabs[_controller.index].child.runtimeType.toString() + "Screen";
       }
+      // _navigatorKey.currentState.pushNamed(_tabs[_controller.index].child.runtimeType.toString());
       print(name);
+      html.window.alert("name");
     });
   }
 
   onTapCallBack(int index) {
     if (index != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _controller.index =  index;
+        _controller.index = index;
       });
     }
   }
@@ -63,7 +83,7 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
   @override
   void dispose() {
     _bloc.dispose();
-    _controller.removeListener(() { });
+    _controller.removeListener(() {});
     super.dispose();
   }
 
@@ -75,12 +95,15 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
           backgroundColor: bigStone02Color,
           activeColor: primaryColor,
           items: _tabs
-              .map((e) =>
-                  BottomNavigationBarItem(icon: e.icon, label: e.title))
+              .map((e) => BottomNavigationBarItem(icon: e.icon, label: e.title))
               .toList(),
         ),
         tabBuilder: (BuildContext context, int index) {
           return CupertinoTabView(
+            routes: <String, WidgetBuilder>{
+              _tabs[index].child.runtimeType.toString():
+                  (BuildContext context) =>_tabs[index].child,
+            },
             builder: (BuildContext context) {
               return _tabs[index].child;
             },
@@ -92,13 +115,12 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return WillPopScope(
-      onWillPop: (){
-        if(_controller.index==0){
+      onWillPop: () {
+        if (_controller.index == 0) {
           return;
-        }else{
-          _controller.index=0;
+        } else {
+          _controller.index = 0;
           return;
         }
       },

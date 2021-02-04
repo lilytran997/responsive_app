@@ -7,7 +7,8 @@ import 'package:demo_desktop/utilities/responsive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:universal_html/html.dart';
+import 'package:universal_html/html.dart'as html;
+import 'package:universal_html/prefer_universal/js.dart' as js;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -36,6 +37,10 @@ class _LoginPageState extends State<LoginPage> {
       _platform = "Appsale";
     } else if (ApplicationPlatform.isWeb) {
       _platform = "Websale";
+      if(js.context['state']!=null){
+        var state = js.JsObject.fromBrowserObject(js.context['state']);
+        print("token from dart: "+state['currentToken'].toString());
+      }
     } else {
       _platform = "undefined platform";
     }
@@ -47,7 +52,6 @@ class _LoginPageState extends State<LoginPage> {
     // TODO: implement dispose
     super.dispose();
   }
-
   Widget _inputItem(String title, TextEditingController controller,
       FocusNode node, FocusNode nextNode, bool isRequire, bool isHide,
       {bool isPhone = false, String hint = ""}) {
@@ -181,9 +185,9 @@ class _LoginPageState extends State<LoginPage> {
                 if(ApplicationPlatform.isWeb){
                   String username = Globals.prefs.getString("KEY_TEST");
                   if (username != null) {
-                    window.localStorage.remove('username');
+                    html.window.localStorage.remove('username');
                   }
-                  window.sessionStorage['username'] = "TEST LOCAL STORAGE";
+                  html.window.sessionStorage['username'] = "TEST LOCAL STORAGE";
                 }else{
                   Globals.prefs.setString("KEY_TEST", "TEST LOCAL STORAGE");
                 }

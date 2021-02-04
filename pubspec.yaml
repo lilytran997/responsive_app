@@ -45,6 +45,8 @@ dependencies:
   file_selector: ^0.7.0
   file_selector_windows: ^0.0.1
   file_selector_platform_interface: ^1.0.3+1
+  firebase: ^8.0.0
+  firebase_messaging: ^7.0.3
 
 # flutter pub get
 # flutter pub run flutter_launcher_icons:main

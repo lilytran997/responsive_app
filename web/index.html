@@ -24,26 +24,71 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
+<!-- This script installs service_worker.js to provide PWA functionality to
+     application. For more information, see:
+     https://developers.google.com/web/fundamentals/primers/service-workers -->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-messaging.js"></script>
   <script>
-    if ('serviceWorker' in navigator) {
+<!--  // Your web app's Firebase configuration-->
+<!--  // For Firebase JS SDK v7.20.0 and later, measurementId is optional-->
+     var firebaseConfig = {
+        apiKey: "AIzaSyD9vsX5169zjv6GYsdzg6SaqJSMWz89c28",
+        authDomain: "flutterweb-92792.firebaseapp.com",
+        projectId: "flutterweb-92792",
+        storageBucket: "flutterweb-92792.appspot.com",
+        messagingSenderId: "662835722389",
+        appId: "1:662835722389:web:6b6a8e538ea29e6037439c",
+        measurementId: "G-EXLN6VF2PE"
+    };
+<!--  // Initialize Firebase-->
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+  <script>
+     if ('serviceWorker' in navigator) {
       window.addEventListener('flutter-first-frame', function () {
         navigator.serviceWorker.register('flutter_service_worker.js');
-<!--          navigator.serviceWorker.register("firebase-messaging-sw.js");-->
       });
+       window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/firebase-messaging-sw.js?v=1.1.8');
+      });
+      const messaging = firebase.messaging();
+      messaging.requestPermission().then(() => {
+       console.log('Notification permission granted.')
+       const messaging = firebase.messaging();
+        messaging.getToken({vapidKey: 'BEGtF1_ZIcyi_dQlol1Sj9Es2vOhzEc0RedOEz26eRzYSJIgMo7NDZuPa3GsBPJ9936PXj5huuUqmeENzzZVlAg'}).then((currentToken) => {
+            if (currentToken) {
+            window.state = {
+            currentToken: currentToken
+            }
+
+            console.log('currentToken in javascript: '+currentToken);
+
+<!--             // Send the token to your server and update the UI if necessary-->
+            } else {
+<!--                // Show permission request UI-->
+                  console.log('No registration token available. Request permission to generate one.');
+            }
+            }).catch((err) => {
+                  console.log('An error occurred while retrieving token. ', err);
+            });
+               }).catch((err) => {
+                   console.log('Unable to get permission to notify. ', err)
+            })
+      messaging.onMessage(function(payload){
+           console.log('Message received. ', payload);
+            const title = payload.notification.title;
+            const options = {body: payload.notification.score};
+          return window.alert(title);
+       });
     }
   </script>
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-<!--  <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>-->
-
-<!--  &lt;!&ndash; TODO: Add SDKs for Firebase products that you want to use-->
-<!--       https://firebase.google.com/docs/web/setup#available-libraries &ndash;&gt;-->
-<!--  <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>-->
-<!--  &lt;!&ndash; TYour web app's Firebase configuration-->
-<!--      For Firebase JS SDK v7.20.0 and later, measurementId is optional&ndash;&gt;-->
-<!--  <script src="./firebase-messaging-sw.js"></script>-->
-  <script src="main.dart.js?version=1.1.11" type="application/javascript"></script>
+  <script src="main.dart.js?version=1.2.3" type="application/javascript"></script>
 </body>
 </html>

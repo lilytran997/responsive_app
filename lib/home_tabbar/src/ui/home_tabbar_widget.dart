@@ -7,6 +7,7 @@ import 'package:demo_desktop/utilities/tab_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_html/html.dart' as html;
+import 'package:universal_html/prefer_universal/js.dart' as js;
 
 class HomeTabbarPage extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
   List<TabWidget> _tabs;
   HomeTabbarBloc _bloc;
   CupertinoTabController _controller = CupertinoTabController(initialIndex: 0);
+  // final _messaging = FBMessaging.instance;
   @override
   void initState() {
     super.initState();
@@ -68,8 +70,12 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
       }
       // _navigatorKey.currentState.pushNamed(_tabs[_controller.index].child.runtimeType.toString());
       print(name);
-      html.window.alert("name");
+      html.window.alert(name);
     });
+    // _messaging.requestPermission().then((_) async {
+    //   final _token = await _messaging.getToken();
+    //   print('Token: $_token');
+    // });
   }
 
   onTapCallBack(int index) {

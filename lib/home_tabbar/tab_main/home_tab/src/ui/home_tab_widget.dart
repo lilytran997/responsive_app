@@ -4,11 +4,9 @@ import 'package:demo_desktop/models/service_category_request_model.dart';
 import 'package:demo_desktop/utilities/custom_line.dart';
 import 'package:demo_desktop/utilities/custom_scaffold.dart';
 import 'package:demo_desktop/utilities/globals.dart';
-import 'package:demo_desktop/utilities/responsive.dart';
 import 'package:demo_desktop/utilities/row_title_widget.dart';
 import 'package:demo_desktop/utilities/tab_model.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomeTabPage extends StatefulWidget {
   final HomeTabbarBloc bloc;

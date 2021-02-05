@@ -39,7 +39,15 @@ class _LoginPageState extends State<LoginPage> {
       _platform = "Websale";
       if(js.context['state']!=null){
         var state = js.JsObject.fromBrowserObject(js.context['state']);
-        print("token from dart: "+state['currentToken'].toString());
+        if(state['currentToken']!=null){
+          print("currentToken from dart: "+state['currentToken'].toString());
+        }
+        if(state['body']!=null){
+          print("body notification from dart: "+state['body'].toString());
+        }
+        if(state['title']!=null){
+          print("title notification from dart: "+state['title'].toString());
+        }
       }
     } else {
       _platform = "undefined platform";

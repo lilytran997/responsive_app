@@ -21,7 +21,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
   <title>Websale</title>
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="/manifest.json">
 </head>
 <body>
 <!-- This script installs service_worker.js to provide PWA functionality to
@@ -46,7 +46,6 @@
         appId: "1:662835722389:web:6b6a8e538ea29e6037439c",
         measurementId: "G-EXLN6VF2PE"
     };
-<!--  // Initialize Firebase-->
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
   </script>
@@ -56,39 +55,21 @@
         navigator.serviceWorker.register('flutter_service_worker.js');
       });
        window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/firebase-messaging-sw.js?v=1.1.8');
+        navigator.serviceWorker.register('/firebase-messaging-sw.js?v=1.2.4');
       });
-      const messaging = firebase.messaging();
-      messaging.requestPermission().then(() => {
-       console.log('Notification permission granted.')
-       const messaging = firebase.messaging();
-        messaging.getToken({vapidKey: 'BEGtF1_ZIcyi_dQlol1Sj9Es2vOhzEc0RedOEz26eRzYSJIgMo7NDZuPa3GsBPJ9936PXj5huuUqmeENzzZVlAg'}).then((currentToken) => {
-            if (currentToken) {
-            window.state = {
-            currentToken: currentToken
-            }
-
-            console.log('currentToken in javascript: '+currentToken);
-
-<!--             // Send the token to your server and update the UI if necessary-->
-            } else {
-<!--                // Show permission request UI-->
-                  console.log('No registration token available. Request permission to generate one.');
-            }
-            }).catch((err) => {
-                  console.log('An error occurred while retrieving token. ', err);
-            });
-               }).catch((err) => {
-                   console.log('Unable to get permission to notify. ', err)
-            })
-      messaging.onMessage(function(payload){
-           console.log('Message received. ', payload);
-            const title = payload.notification.title;
-            const options = {body: payload.notification.score};
-          return window.alert(title);
-       });
     }
   </script>
-  <script src="main.dart.js?version=1.2.3" type="application/javascript"></script>
+<!--  <script>-->
+<!--    window.Notification.requestPermission().then((permission)=>{-->
+<!--       console.log('Notification permission granted.');-->
+<!--       if(permission !== 'granted'){-->
+<!--        throw new Error('Permission not granted for Notification');-->
+<!--       }-->
+<!--    }).catch((err) => {-->
+<!--                   console.log('Unable to get permission to notify. ', err)-->
+<!--            });-->
+<!--  </script>-->
+  <script src="config_messaging.js?version=1.0.0" async></script>
+  <script src="main.dart.js?version=1.2.9" type="application/javascript"></script><noscript>Your browser does not support JavaScript!</noscript>
 </body>
 </html>

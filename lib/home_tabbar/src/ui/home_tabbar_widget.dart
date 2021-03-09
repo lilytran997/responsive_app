@@ -3,11 +3,14 @@ import 'package:demo_desktop/home_tabbar/src/bloc/home_tabbar_bloc.dart';
 import 'package:demo_desktop/home_tabbar/tab_main/home_tab/src/ui/home_tab_widget.dart';
 import 'package:demo_desktop/home_tabbar/tab_main/profile_tab/src/ui/profile_tab_widget.dart';
 import 'package:demo_desktop/home_tabbar/tab_main/report_tab/src/ui/report_tab_widget.dart';
+import 'package:demo_desktop/utilities/responsive.dart';
 import 'package:demo_desktop/utilities/tab_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_html/html.dart' as html;
-import 'package:universal_html/prefer_universal/js.dart' as js;
+// import 'package:universal_html/prefer_universal/js.dart' as js;
+
+import 'home_desktop_widget.dart';
 
 class HomeTabbarPage extends StatefulWidget {
   @override
@@ -32,15 +35,15 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
             onTapCallBack: onTapCallBack,
           ),
           stringTabbarHome,
-          () {}))
+          () {},iconUrl: icTabbarHome,isSelected: true,id: 1))
       ..add(TabWidget(ImageIcon(AssetImage(icTabbarCart)), Container(),
-          stringTabbarCart, () {}))
+          stringTabbarCart, () {},iconUrl: icTabbarCart,id: 2))
       ..add(TabWidget(ImageIcon(AssetImage(icTabbarQueueIn)), ReportPage(),
-          stringTabbarQueueIn, () {}))
+          stringTabbarQueueIn, () {},iconUrl: icTabbarQueueIn,id: 3))
       ..add(TabWidget(ImageIcon(AssetImage(icTabbarNotification)), Container(),
-          stringTabbarNotification, () {}))
+          stringTabbarNotification, () {},iconUrl: icTabbarNotification,id: 4))
       ..add(TabWidget(ImageIcon(AssetImage(icTabbarUser)), ProfilePage(),
-          stringTabbarUser, () {}));
+          stringTabbarUser, () {},iconUrl: icTabbarUser,id: 5));
     _controller.addListener(() {
       String name = "";
       if (_tabs[_controller.index]
@@ -52,8 +55,8 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
                 .child
                 .runtimeType
                 .toString()
-                .replaceAll('Screen', ' ') +
-            "Screen";
+                .replaceAll('Screen', '') +
+            "Tab";
       } else if (_tabs[_controller.index]
           .child
           .runtimeType
@@ -63,14 +66,18 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
                 .child
                 .runtimeType
                 .toString()
-                .replaceAll('Page', ' ') +
-            "Screen";
+                .replaceAll('Page', '') +
+            "Tab";
       } else {
-        name = _tabs[_controller.index].child.runtimeType.toString() + "Screen";
+        name = _tabs[_controller.index].child.runtimeType.toString() + "Tab";
       }
       // _navigatorKey.currentState.pushNamed(_tabs[_controller.index].child.runtimeType.toString());
       print(name);
-      html.window.alert(name);
+      html.window.history.pushState(null, "/HomePage", "/HomePage#$name");
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _bloc.setListTab(_tabs);
+      _bloc.initBloc();
     });
     // _messaging.requestPermission().then((_) async {
     //   final _token = await _messaging.getToken();
@@ -132,7 +139,11 @@ class _HomeTabbarPageState extends State<HomeTabbarPage> {
       },
       child: Scaffold(
         backgroundColor: royalBlue01Color,
-        body: _setupLayout(),
+        body: ResponsiveWidget(
+          smallScreen: _setupLayout(),
+          largeScreen: HomeTabDesktopPage(bloc: _bloc,),
+          mediumScreen: HomeTabDesktopPage(bloc: _bloc,),
+        ),
       ),
     );
   }

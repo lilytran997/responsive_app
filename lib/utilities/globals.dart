@@ -32,20 +32,20 @@ class Globals{
          print("isLargerWidth");
          maxPadding = maxHeight * 0.05;
          minPadding = maxPadding / 2;
-         tabbarSize = maxHeight / 10 * 7;
+         tabbarSize = maxHeight/ 10 * 7;
        }else{
          maxPadding = maxWidth * 0.05;
          minPadding = maxPadding / 2;
-         tabbarSize = maxWidth / 10 * 7;
+         tabbarSize = maxWidth/ 10 * 7;
        }
      }else if(ResponsiveWidget.isMediumScreen(context)){
        if(ResponsiveWidget.isLargerWidth(context)){
          print("isLargerWidth");
          maxPadding = maxHeight * 0.05;
          minPadding = maxPadding / 2;
-         tabbarSize = maxHeight / 10 * 7;
+         tabbarSize = maxHeight/ 10 * 7;
        }else{
-         maxPadding = maxWidth * 0.05;
+         maxPadding = maxWidth* 0.05;
          minPadding = maxPadding / 2;
          tabbarSize = maxWidth / 10 * 7;
        }
@@ -53,7 +53,7 @@ class Globals{
        print("isSmallScreen");
        maxPadding = 20;
        minPadding = maxPadding / 2;
-       tabbarSize = maxWidth / 10 * 7;
+       tabbarSize = maxWidth/ 10 * 7;
      }
    }
    if(model!=null){

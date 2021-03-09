@@ -1,9 +1,11 @@
 import 'package:demo_desktop/common/constant.dart';
 import 'package:demo_desktop/home_tabbar/src/bloc/home_tabbar_bloc.dart';
 import 'package:demo_desktop/models/service_category_request_model.dart';
+import 'package:demo_desktop/utilities/check_platform.dart';
 import 'package:demo_desktop/utilities/custom_line.dart';
 import 'package:demo_desktop/utilities/custom_scaffold.dart';
 import 'package:demo_desktop/utilities/globals.dart';
+import 'package:demo_desktop/utilities/responsive.dart';
 import 'package:demo_desktop/utilities/row_title_widget.dart';
 import 'package:demo_desktop/utilities/tab_model.dart';
 import 'package:flutter/material.dart';
@@ -260,10 +262,11 @@ class _HomeTabPageState extends State<HomeTabPage> {
       height: Globals.maxHeight,
       child: Column(
         children: [
-          Container(
-            height: Globals.statusBarHeight + Globals.maxPadding,
-            color: primaryColor,
-          ),
+          if (ApplicationPlatform.isAndroid || ApplicationPlatform.isIOS)
+            Container(
+              height: Globals.statusBarHeight + Globals.maxPadding,
+              color: primaryColor,
+            ),
           Expanded(
             child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
@@ -271,7 +274,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildMainService(),
+               if(ResponsiveWidget.isSmallScreen(context))_buildMainService(),
                   _buildListActivityItem(),
                   _buildImplementation(),
                   _buildSlipsReturn()
@@ -557,7 +560,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
                   alignment: Alignment.topCenter,
                   width: Globals.maxWidth,
                   decoration: BoxDecoration(
-                      color: Colors.transparent,
+                      // color: Colors.transparent,
                       image: DecorationImage(
                           image: AssetImage(imgAppbar), fit: BoxFit.cover)),
                 );
@@ -580,7 +583,6 @@ class _HomeTabPageState extends State<HomeTabPage> {
 
   @override
   Widget build(BuildContext context) {
-    Globals().init(context: context);
     return CustomScaffold(
       backgroundColor: royalBlue01Color,
       body: _buildBody(),

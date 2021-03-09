@@ -16,7 +16,7 @@ class FirebaseMessagingHelper implements NotificationHelper {
   bool _isReady = false;
   String _token;
 
-  final _firebaseMessaging = FirebaseMessaging();
+  final _firebaseMessaging = FirebaseMessaging.instance;
   final _controller = StreamController<NotificationModel>.broadcast();
 
   @override
@@ -40,16 +40,26 @@ class FirebaseMessagingHelper implements NotificationHelper {
     return _isReady;
   }
 
-  Future<dynamic> _onMessageReceived(Map<String, dynamic> payload) async {
-    final notif = NotificationModel.fromJson(payload);
-    _controller.add(notif);
+  Future<dynamic> _onMessageReceived(RemoteMessage payload) async {
+    if (payload.notification.title != null && payload.notification.body != null){
+
+      final notif = NotificationModel(body: payload.notification.body,title:payload.notification.title );
+      _controller.add(notif);
+    }
   }
 
   Future<bool> _initialize() async {
     try {
       // For iOS request permission first
       await requestPermission();
-      _firebaseMessaging.configure(onMessage: _onMessageReceived);
+      FirebaseMessaging.onMessage.listen((event) {
+        print("onMessage: $event");
+        _onMessageReceived(event);
+      });
+      FirebaseMessaging.onMessageOpenedApp.listen((event) {
+        print("onMessageOpenedApp: $event");
+        _onMessageReceived(event);
+      });
       return true;
     } catch (e) {
       print('Error while initializing: ${e.toString()}');
@@ -62,6 +72,14 @@ class FirebaseMessagingHelper implements NotificationHelper {
 
   @override
   Future<dynamic> requestPermission() async {
-    return _firebaseMessaging.requestNotificationPermissions();
+    return _firebaseMessaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
   }
 }

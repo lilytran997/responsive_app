@@ -3,6 +3,7 @@ import 'package:demo_desktop/utilities/check_platform.dart';
 import 'package:demo_desktop/utilities/custom_navigator.dart';
 import 'package:demo_desktop/utilities/globals.dart';
 import 'package:flutter/material.dart';
+import 'package:universal_html/html.dart' as html;
 
 class SplashScreenPage extends StatefulWidget {
   @override
@@ -33,9 +34,6 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     Future.delayed(Duration(seconds: 5))
         .then((value) => CustomNavigator().pushName(
               context, "/LoginPage",));
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-    });
   }
   @override
   void dispose() {
@@ -45,7 +43,6 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
   @override
   Widget build(BuildContext context) {
-    Globals().init(context: context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(

@@ -45,27 +45,29 @@ class _MyHomePageState extends State<ProfilePage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                _platform??"",
+                _platform ?? "",
                 style: Theme.of(context).textTheme.headline6,
               ),
             ),
             Container(
               margin: EdgeInsets.only(
-                  right: Globals.maxPadding,left: Globals.maxPadding,bottom: Globals.minPadding
-              ),
+                  right: Globals.maxPadding,
+                  left: Globals.maxPadding,
+                  bottom: Globals.minPadding),
               child: ApplicationNetworkImage(
                 url:
-                "https://images.pexels.com/photos/414102/pexels-photo-414102.jpeg",
+                    "https://images.pexels.com/photos/414102/pexels-photo-414102.jpeg",
               ),
             ),
             Container(
               margin: EdgeInsets.only(
-                  right: Globals.maxPadding,left: Globals.maxPadding,bottom: Globals.minPadding
-              ),
+                  right: Globals.maxPadding,
+                  left: Globals.maxPadding,
+                  bottom: Globals.minPadding),
               child: image != null
                   ? ApplicationPlatform.isWeb
-                  ? image.image
-                  : Image.file(image.file)
+                      ? image.image
+                      : Image.file(image.file)
                   : Container(),
             ),
           ],

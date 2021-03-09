@@ -17,7 +17,6 @@ class _MyHomePageState extends State<ReportPage> {
 
   @override
   Widget build(BuildContext context) {
-    Globals().init(context: context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: ApplicationPlatform.isWindows
